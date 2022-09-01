@@ -32,7 +32,19 @@ function Home({ tx, address, yourLocalBalance, localProvider, price, readContrac
           </Button>
           <br /> <br />
           <div>
-            1 USD 💵 = {currentPrice / 10000000} ounce of Gold
+            1 USD 💵 = {currentPrice / 10000000} ounce of Gold 🟡
+          </div>
+          <div>
+            <i>if the value is showing NaN, please refresh</i>
+            <Button
+            type="link"
+            onClick={async () => {
+              const goldPrice = await readContracts.GoldPriceFeed.getGoldPrice()
+              setCurrentPrice(goldPrice.toString())
+            }}
+            >
+              🔁
+            </Button>
           </div>
         </div>
         <Divider/>
