@@ -31,6 +31,7 @@ import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, ExampleUI, Hints, Subgraph } from "./views";
 import { useStaticJsonRPC } from "./hooks";
+import { local } from "web3modal";
 
 const { ethers } = require("ethers");
 /// 📡 What chain are your contracts deployed to?
@@ -273,7 +274,16 @@ function App(props) {
       <Switch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-          <Home yourLocalBalance={yourLocalBalance} readContracts={readContracts} />
+          <Home 
+            tx={tx}
+            address={address}
+            yourLocalBalance={yourLocalBalance} 
+            localProvider={localProvider}
+            price={price}
+            readContracts={readContracts}  
+            writeContracts={writeContracts}
+            mainnetProvider={mainnetProvider}
+          />
         </Route>
         <Route exact path="/debug">
           {/*
